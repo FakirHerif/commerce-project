@@ -10,6 +10,9 @@ from .models import User
 def index(request):
     return render(request, "auctions/index.html")
 
+def createListing(request):
+    if request.method == "GET":
+        return render(request, "auctions/create.html")
 
 def login_view(request):
     if request.method == "POST":
