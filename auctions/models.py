@@ -4,3 +4,16 @@ from django.db import models
 
 class User(AbstractUser):
     pass
+
+class Category(models.Model):
+    categoryName = models.CharField(max_length=64)
+
+class Listing(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.CharField(max_length=640)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, related_name="category" )
+    price = models.FloatField()
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
+    imgUrl = models.CharField(max_length=6400)
+    isActive = models.BooleanField(default=True)
+
