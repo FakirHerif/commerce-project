@@ -8,6 +8,9 @@ class User(AbstractUser):
 class Category(models.Model):
     categoryName = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.categoryName
+
 class Listing(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=640)
@@ -16,4 +19,7 @@ class Listing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
     imgUrl = models.CharField(max_length=6400)
     isActive = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
