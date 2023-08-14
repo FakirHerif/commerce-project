@@ -3,5 +3,35 @@
 {% block body %}
     <h2>Create</h2>
 
-    TODO
+    <form action="{% url 'create' %}" method="POST">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label for="imgUrl">Image URL</label>
+            <input type="text" class="form-control" name="imgUrl" id="imgUrl" placeholder="Image URL">
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" name="price" id="price" placeholder="Price">
+          </div>
+          <div class="select">
+            <select class="category" name="category" id="category">
+                <option selected>Select Category</option>
+                <option value="1">PSU</option>
+                <option value="2">SSD</option>
+                <option value="3">MOTHERBOARD</option>
+                <option value="4">CPU</option>
+                <option value="5">GPU</option>
+                <option value="6">RAM</option>
+              </select>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-outline-success">Create New Listing</button>
+    </form>
 {% endblock %}
