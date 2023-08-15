@@ -16,6 +16,27 @@ def createListing(request):
         return render(request, "auctions/create.html", {
             "categories": categories
         })
+    else:
+        title = request.POST["title"]
+        description = request.POST["description"]
+        imgUrl = request.POST["imgUrl"]
+        price = request.POST["price"]
+        category = request.POST["category"]
+
+        thecurrentUser = request.user
+
+        categoryInf = Category.objects.get(categoryName = category)
+        
+        newListing= Listing(
+            title = title,
+            description = description,
+            imgUrl = imgUrl,
+            price = float(price),
+            category = categoryInf,
+            owner = thecurrentUser
+        )
+        newListing.save()
+        return HttpResponseRedirect(reverse("index"))
 
 def login_view(request):
     if request.method == "POST":
