@@ -1,5 +1,9 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Product</h2>
+    <h2>Product: {{ product.title }}</h2>
+    <img src="{{ product.imgUrl }}" alt=" {{ product.title }}" height="350px">
+    <p>Description: {{ product.description }}</p>
+    <p>Seller: {{ product.owner }}</p>
+    <h4>Price: {{ product.price }} Turkish Liras</h5>
 {% endblock %}
