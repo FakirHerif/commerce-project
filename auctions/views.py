@@ -6,6 +6,8 @@ from django.urls import reverse
 
 from .models import User, Category, Listing
 
+def product(request, id):
+    return render(request,"auctions/product.html")
 
 def index(request):
     activeList = Listing.objects.filter(isActive=True)
