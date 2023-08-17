@@ -53,7 +53,8 @@ def viewCategory(request):
         categories = Category.objects.all()
         return render(request, "auctions/index.html", {
             "listings": activeList,
-            "categories": categories
+            "categories": categories,
+            "selected_category": category
     })
 
 def createListing(request):

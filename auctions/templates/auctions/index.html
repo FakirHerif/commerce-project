@@ -7,7 +7,7 @@
         <label for="category">Select Category:</label>
             <select class="category" name="category" id="category">
                 {% for Liste in categories %}
-            <option value="{{ Liste }}">{{ Liste }}</option>
+            <option value="{{ Liste }}" {% if selected_category and selected_category == Liste %}selected{% endif %}>{{ Liste }}</option>
                 {% endfor %}
           </select>
         <button type="submit" class="btn btn-warning">Select</button>
