@@ -15,11 +15,14 @@ def product(request, id):
     })
 
 def toWatchList(request):
-    theCurrentUser = request.user
-    lists = theCurrentUser.WatchListForUsers.all()
-    return render(request, "auctions/toWatchList.html", {
+    if request.user.is_authenticated:
+        theCurrentUser = request.user
+        lists = theCurrentUser.WatchListForUsers.all()
+        return render(request, "auctions/toWatchList.html", {
         "lists": lists
-    })
+        })
+    else:
+        return HttpResponse("You need to be logged in to access your WatchList")
 
 def removeFromWatchList(request,id):
     productDetails = Listing.objects.get(pk=id)
