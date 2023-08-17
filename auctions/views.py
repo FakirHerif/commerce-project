@@ -14,6 +14,12 @@ def product(request, id):
         "onWatchList": onWatchList
     })
 
+def toWatchList(request):
+    theCurrentUser = request.user
+    lists = theCurrentUser.WatchListForUsers.all()
+    return render(request, "auctions/toWatchList.html", {
+        "lists": lists
+    })
 
 def removeFromWatchList(request,id):
     productDetails = Listing.objects.get(pk=id)
