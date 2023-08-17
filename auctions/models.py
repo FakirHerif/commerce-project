@@ -26,7 +26,7 @@ class Listing(models.Model):
 
 class Comment(models.Model):
     writer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="userMsg")
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, blank=True, null=True, related_name="listingMsg")
+    product = models.ForeignKey(Listing, on_delete=models.CASCADE, blank=True, null=True, related_name="productMsg")
     msg = models.CharField(max_length=640)
 
     def ___str___(self):

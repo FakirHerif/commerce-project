@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Category, Listing
+from .models import User, Category, Listing, Comment
 
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
@@ -13,6 +13,18 @@ def product(request, id):
         "product": productDetails,
         "onWatchList": onWatchList
     })
+
+def newComment(request,id):
+    theCurrentUser = request.user
+    productDetails = Listing.objects.get(pk=id)
+    msg = request.POST['newComment']
+    
+    newComment = Comment(
+        writer = theCurrentUser,
+        product = productDetails,
+        msg = msg
+    )
+    return HttpResponseRedirect(reverse("product", args=[id]))
 
 def toWatchList(request):
     if request.user.is_authenticated:
@@ -36,6 +48,7 @@ def addToWatchList(request,id):
     theCurrentUser = request.user
     productDetails.toWatchList.add(theCurrentUser)
     return HttpResponseRedirect(reverse("product", args=[id]))
+
 
 def index(request):
     activeList = Listing.objects.filter(isActive=True)

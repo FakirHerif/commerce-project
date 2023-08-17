@@ -24,4 +24,13 @@
     <p>Description: {{ product.description }}</p>
     <p>Seller: {{ product.owner }}</p>
     <h4>Price: {{ product.price }} Turkish Liras</h5>
+
+    <div class="row mx-3">
+        <h2>Comments</h2>
+        {% if user.is_authenticated %}
+            <form action="{% url 'newComment' id=product.id %}" method="POST">
+                <input type="text" name="newComment" placeholder="Add New Comment">
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}
