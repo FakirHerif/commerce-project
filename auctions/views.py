@@ -8,8 +8,10 @@ from .models import User, Category, Listing
 
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
+    onWatchList = False
     return render(request,"auctions/product.html", {
-        "product": productDetails
+        "product": productDetails,
+        "onWatchList": onWatchList
     })
 
 def index(request):

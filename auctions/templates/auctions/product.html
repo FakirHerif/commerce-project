@@ -4,6 +4,11 @@
 
     <div class="row">
         {% if user.is_authenticated %}
+            {% if onWatchList %}
+                <h1>Remove From List</h1>
+            {% else %}
+                <h1>Add To List</h1>
+            {% endif %}
 
         {% endif %}
     </div>
