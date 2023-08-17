@@ -19,6 +19,7 @@ class Listing(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
     imgUrl = models.CharField(max_length=6400)
     isActive = models.BooleanField(default=True)
+    toWatchList = models.ManyToManyField(User, blank=True, null=True, related_name="WatchListForUsers")
 
     def __str__(self):
         return self.title
