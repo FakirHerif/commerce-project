@@ -56,6 +56,12 @@ def viewCategory(request):
             "categories": categories,
             "selected_category": category
     })
+    else:
+        categories = Category.objects.all()
+        return render(request, "auctions/index.html", {
+            "categories": categories
+        })
+
 
 def createListing(request):
     if request.method == "GET":
