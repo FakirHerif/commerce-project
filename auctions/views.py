@@ -22,7 +22,7 @@ def toWatchList(request):
         "lists": lists
         })
     else:
-        return HttpResponse("You need to be logged in to access your WatchList")
+        return render(request, "auctions/toWatchList.html")
 
 def removeFromWatchList(request,id):
     productDetails = Listing.objects.get(pk=id)

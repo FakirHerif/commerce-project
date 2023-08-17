@@ -4,7 +4,6 @@
     <h2>Show List</h2>
 
     {% if user.is_authenticated %}
-
         <div class="row mx-3">
         {% for listing in lists %}
             <div class="card" style="width: 18rem;">
@@ -19,6 +18,7 @@
         </div>
     {% else %}
         <p>You need to be logged in to access your WatchList</p>
-        <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+        <br>
+        <a href="{% url 'login' %}" class="btn btn-danger">Log In</a>
     {% endif %}
 {% endblock %}
