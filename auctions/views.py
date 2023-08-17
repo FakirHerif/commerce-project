@@ -9,9 +9,11 @@ from .models import User, Category, Listing, Comment
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
     onWatchList = request.user in productDetails.toWatchList.all()
+    showComments = Comment.objects.filter(product=productDetails)
     return render(request,"auctions/product.html", {
         "product": productDetails,
-        "onWatchList": onWatchList
+        "onWatchList": onWatchList,
+        "showComments": showComments
     })
 
 def newComment(request,id):
@@ -24,6 +26,7 @@ def newComment(request,id):
         product = productDetails,
         msg = msg
     )
+    newComment.save()
     return HttpResponseRedirect(reverse("product", args=[id]))
 
 def toWatchList(request):

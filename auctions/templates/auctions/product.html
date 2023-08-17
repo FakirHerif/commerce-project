@@ -31,6 +31,7 @@
     <br>
         {% if user.is_authenticated %}
             <form action="{% url 'newComment' id=product.id %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="price">Add New Comment: </label>
                     <input type="text" name="newComment" placeholder="Add New Comment">
@@ -38,5 +39,10 @@
                   </div>
             </form>
         {% endif %}
-
+        <br>
+        <ul class="list-group">
+            {% for comments in showComments %}
+                <li class="list-group-item">{{ comments.msg }}</li>
+            {% endfor %}
+        </ul>
 {% endblock %}
