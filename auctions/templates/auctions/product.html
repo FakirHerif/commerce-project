@@ -25,12 +25,18 @@
     <p>Seller: {{ product.owner }}</p>
     <h4>Price: {{ product.price }} Turkish Liras</h5>
 
-    <div class="row mx-3">
+    <br>
+
         <h2>Comments</h2>
+    <br>
         {% if user.is_authenticated %}
             <form action="{% url 'newComment' id=product.id %}" method="POST">
-                <input type="text" name="newComment" placeholder="Add New Comment">
+                <div class="form-group">
+                    <label for="price">Add New Comment: </label>
+                    <input type="text" name="newComment" placeholder="Add New Comment">
+                    <button type="submit" class="btn btn-warning">ADD</button>
+                  </div>
             </form>
         {% endif %}
-    </div>
+
 {% endblock %}
