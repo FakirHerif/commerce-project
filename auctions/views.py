@@ -8,17 +8,25 @@ from .models import User, Category, Listing
 
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
-    onWatchList = False
+    onWatchList = request.user in productDetails.toWatchList.all()
     return render(request,"auctions/product.html", {
         "product": productDetails,
         "onWatchList": onWatchList
     })
 
+
 def removeFromWatchList(request,id):
-    return 
+    productDetails = Listing.objects.get(pk=id)
+    theCurrentUser = request.user
+    productDetails.toWatchList.remove(theCurrentUser)
+    return HttpResponseRedirect(reverse("product", args=[id]))
+
 
 def addToWatchList(request,id):
-    return 
+    productDetails = Listing.objects.get(pk=id)
+    theCurrentUser = request.user
+    productDetails.toWatchList.add(theCurrentUser)
+    return HttpResponseRedirect(reverse("product", args=[id]))
 
 def index(request):
     activeList = Listing.objects.filter(isActive=True)
