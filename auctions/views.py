@@ -14,6 +14,12 @@ def product(request, id):
         "onWatchList": onWatchList
     })
 
+def removeFromWatchList(request,id):
+    return 
+
+def addToWatchList(request,id):
+    return 
+
 def index(request):
     activeList = Listing.objects.filter(isActive=True)
     categories = Category.objects.all()
