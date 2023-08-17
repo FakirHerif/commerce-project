@@ -57,10 +57,7 @@ def viewCategory(request):
             "selected_category": category
     })
     else:
-        categories = Category.objects.all()
-        return render(request, "auctions/index.html", {
-            "categories": categories
-        })
+        return HttpResponseRedirect(reverse("index"))
 
 
 def createListing(request):
