@@ -38,6 +38,12 @@ def product(request, id):
         "winner": winner 
     })
 
+def closed_listings(request):
+    closed_list = Listing.objects.filter(isActive=False)
+    return render(request, "auctions/closed_listings.html", {
+        "closed_listings": closed_list
+    })
+
 def disableBid(request, id):
     productDetails = Listing.objects.get(pk=id)
     productDetails.isActive = False
