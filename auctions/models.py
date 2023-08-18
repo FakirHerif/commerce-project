@@ -15,7 +15,7 @@ class Category(models.Model):
 
 class Bid(models.Model):
     bid = models.IntegerField()
-    bidder = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="bidderUser")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="bidUser")
 
     def ___str___(self):
         return self.bid

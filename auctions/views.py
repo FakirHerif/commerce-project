@@ -48,7 +48,7 @@ def addBid(request, id):
                 newBid = int(newBid)
                 productDetails = Listing.objects.get(pk=id)
                 if newBid > productDetails.price.bid:
-                    updateBid = Bid(bidder=request.user, bid=newBid)
+                    updateBid = Bid(user=request.user, bid=newBid)
                     updateBid.save()
                     productDetails.price = updateBid
                     productDetails.save()
@@ -159,7 +159,7 @@ def createListing(request):
 
         categoryInf = Category.objects.get(categoryName = category)
         
-        bid = Bid(bid=int(price), bidder = thecurrentUser)
+        bid = Bid(bid=int(price), user = thecurrentUser)
         bid.save()
 
         newListing= Listing(
