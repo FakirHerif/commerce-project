@@ -211,8 +211,14 @@ def createListing(request):
 
         thecurrentUser = request.user
 
+        # Kontrol: Gerekli alanlar boş bırakıldıysa
+        if not title or not description or not imgUrl or not price:
+            return render(request, "auctions/create.html", {
+                "categories": Category.objects.all(),
+                "message": "All fields are required."
+            })
 
-                # Kontrol: Kategori seçilmediyse
+        # Kontrol: Kategori seçilmediyse
         if category == "Select Category":
             return render(request, "auctions/create.html", {
                 "categories": Category.objects.all(),
