@@ -62,43 +62,52 @@ def addBid(request, id):
         onWatchList = request.user in productDetails.toWatchList.all()
         showComments = Comment.objects.filter(product=productDetails)
         isOwner = request.user.username == productDetails.owner.username
-        if newBid is not None and newBid != '':
-            try:
-                newBid = int(newBid)
-                productDetails = Listing.objects.get(pk=id)
-                if newBid > productDetails.price.bid:
-                    updateBid = Bid(user=request.user, bid=newBid)
-                    updateBid.save()
-                    productDetails.price = updateBid
-                    productDetails.save()
-                    return render(request, "auctions/product.html",{
-                        "product": productDetails,
-                        "msg": "Bid was updated SUCCESSFULLY",
-                        "update": True,
-                        "onWatchList": onWatchList,
-                        "showComments": showComments,
-                        "isOwner" : isOwner
-                    })
-                else:
-                    return render(request, "auctions/product.html",{
-                        "product": productDetails,
-                        "msg": "Bid was updated FAILED. Please enter a higher bid.",
-                        "update": False,
-                        "onWatchList": onWatchList,
-                        "showComments": showComments,
-                        "isOwner" : isOwner
-                    })
-            except ValueError:
-                return render(request, "auctions/product.html",{
-                    "product": productDetails,
-                    "msg": "Invalid bid value. Please enter a valid number.",
-                    "update": False,
-                    "onWatchList": onWatchList,
-                    "showComments": showComments,
-                    "isOwner" : isOwner
-                })
-    # Eğer bir hata durumu veya POST isteği değilse, ürün sayfasına yönlendirme yap.
+
+        if isOwner:
+            bidError = "You cannot place a bid on your own product."
+        else:
+            bidError = None
+
+            if newBid is not None and newBid != '':
+                try:
+                    newBid = int(newBid)
+                    current_highest_bid = productDetails.price.bid if productDetails.price else 0
+
+                    if newBid > current_highest_bid:
+                        updateBid = Bid(user=request.user, bid=newBid)
+                        updateBid.save()
+
+                        if productDetails.price:
+                            productDetails.price.delete()
+
+                        productDetails.price = updateBid
+                        productDetails.save()
+                        return render(request, "auctions/product.html",{
+                            "product": productDetails,
+                            "msg": "Bid was updated SUCCESSFULLY",
+                            "update": True,
+                            "onWatchList": onWatchList,
+                            "showComments": showComments,
+                            "isOwner" : isOwner,
+                            "bidError": bidError
+                        })
+                    else:
+                        bidError = "Please enter a bid higher than the current highest bid."
+                except ValueError:
+                    bidError = "Invalid bid value. Please enter a valid number."
+
+        return render(request, "auctions/product.html",{
+            "product": productDetails,
+            "msg": "Bid update FAILED.",
+            "update": False,
+            "onWatchList": onWatchList,
+            "showComments": showComments,
+            "isOwner" : isOwner,
+            "bidError": bidError
+        })
+        
     return HttpResponseRedirect(reverse("product", args=[id]))
+
 
 def newComment(request,id):
     theCurrentUser = request.user
