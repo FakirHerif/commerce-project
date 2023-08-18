@@ -44,7 +44,9 @@
             {% for comments in showComments %}
                 <li class="list-group-item"> COMMENT: {{ comments.msg }}
                     <br>
+                    <br>
                     <p>COMMENT OWNER: <strong>{{ comments.writer }}</strong></p>
+                    <p>COMMENT TIME: <strong>{{ comments.timestamp }}</strong></p>
                 </li>
             {% endfor %}
         </ul>

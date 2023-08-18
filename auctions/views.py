@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 
 from .models import User, Category, Listing, Comment
 
@@ -24,7 +25,8 @@ def newComment(request,id):
     newComment = Comment(
         writer = theCurrentUser,
         product = productDetails,
-        msg = msg
+        msg = msg,
+        timestamp = timezone.now()
     )
     newComment.save()
     return HttpResponseRedirect(reverse("product", args=[id]))
