@@ -211,6 +211,14 @@ def createListing(request):
 
         thecurrentUser = request.user
 
+
+                # Kontrol: Kategori seçilmediyse
+        if category == "Select Category":
+            return render(request, "auctions/create.html", {
+                "categories": Category.objects.all(),
+                "message": "Please select a category."
+            })
+
         categoryInf = Category.objects.get(categoryName = category)
         
         bid = Bid(bid=int(price), user = thecurrentUser)
