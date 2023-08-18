@@ -11,11 +11,30 @@ def product(request, id):
     productDetails = Listing.objects.get(pk=id)
     onWatchList = request.user in productDetails.toWatchList.all()
     showComments = Comment.objects.filter(product=productDetails)
+    isOwner = request.user.username == productDetails.owner.username
     return render(request,"auctions/product.html", {
         "product": productDetails,
         "onWatchList": onWatchList,
-        "showComments": showComments
+        "showComments": showComments,
+        "isOwner" : isOwner 
     })
+
+def disableBid(request, id):
+    productDetails = Listing.objects.get(pk=id)
+    productDetails.isActive = False
+    productDetails.save()
+    onWatchList = request.user in productDetails.toWatchList.all()
+    showComments = Comment.objects.filter(product=productDetails)
+    isOwner = request.user.username == productDetails.owner.username    
+    return render(request,"auctions/product.html", {
+        "product": productDetails,
+        "onWatchList": onWatchList,
+        "showComments": showComments,
+        "isOwner" : isOwner,
+        "update" : True,
+        "msg" : "CONGRATULATIONS AUCTION IS OVER"
+    })    
+
 
 def addBid(request, id):
     if request.method == "POST":
@@ -23,6 +42,7 @@ def addBid(request, id):
         productDetails = Listing.objects.get(pk=id)
         onWatchList = request.user in productDetails.toWatchList.all()
         showComments = Comment.objects.filter(product=productDetails)
+        isOwner = request.user.username == productDetails.owner.username
         if newBid is not None and newBid != '':
             try:
                 newBid = int(newBid)
@@ -37,7 +57,8 @@ def addBid(request, id):
                         "msg": "Bid was updated SUCCESSFULLY",
                         "update": True,
                         "onWatchList": onWatchList,
-                        "showComments": showComments
+                        "showComments": showComments,
+                        "isOwner" : isOwner
                     })
                 else:
                     return render(request, "auctions/product.html",{
@@ -45,13 +66,17 @@ def addBid(request, id):
                         "msg": "Bid was updated FAILED. Please enter a higher bid.",
                         "update": False,
                         "onWatchList": onWatchList,
-                        "showComments": showComments
+                        "showComments": showComments,
+                        "isOwner" : isOwner
                     })
             except ValueError:
                 return render(request, "auctions/product.html",{
                     "product": productDetails,
                     "msg": "Invalid bid value. Please enter a valid number.",
-                    "update": False
+                    "update": False,
+                    "onWatchList": onWatchList,
+                    "showComments": showComments,
+                    "isOwner" : isOwner
                 })
     # Eğer bir hata durumu veya POST isteği değilse, ürün sayfasına yönlendirme yap.
     return HttpResponseRedirect(reverse("product", args=[id]))
