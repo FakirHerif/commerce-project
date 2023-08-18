@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import User, Category, Listing, Comment
+from .models import User, Category, Listing, Comment, Bid
 
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
@@ -95,11 +95,14 @@ def createListing(request):
 
         categoryInf = Category.objects.get(categoryName = category)
         
+        bid = Bid(bid=int(price), bidder = thecurrentUser)
+        bid.save()
+
         newListing= Listing(
             title = title,
             description = description,
             imgUrl = imgUrl,
-            price = float(price),
+            price = bid,
             category = categoryInf,
             owner = thecurrentUser
         )
