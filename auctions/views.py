@@ -40,8 +40,10 @@ def product(request, id):
 
 def closed_listings(request):
     closed_list = Listing.objects.filter(isActive=False)
+    categories = Category.objects.all()
     return render(request, "auctions/closed_listings.html", {
-        "closed_listings": closed_list
+        "closed_listings": closed_list,
+        "categories": categories,
     })
 
 def disableBid(request, id):
