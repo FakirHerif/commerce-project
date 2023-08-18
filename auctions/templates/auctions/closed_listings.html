@@ -3,7 +3,7 @@
 {% block body %}
     <h2>Closed Listings</h2>
 
-    <form action="{% url 'closed_listings' %}" method="get" class="my-4">
+    <form action="{% url 'closed_listings' %}" method="GET" class="my-4">
       <label for="category">Select a category:</label>
       <select name="category" id="category">
           <option value="" {% if not selected_category %}selected{% endif %}>All Categories</option>

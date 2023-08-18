@@ -175,17 +175,25 @@ def index(request):
 
 def viewCategory(request):
     if request.method == "POST":
-        categoryForm = request.POST['category']
-        category = Category.objects.get(categoryName=categoryForm)
-        activeList = Listing.objects.filter(isActive=True, category=category)
+        categoryForm = request.POST.get('category')
+        if categoryForm:
+            try:
+                category = Category.objects.get(categoryName=categoryForm)
+                activeList = Listing.objects.filter(isActive=True, category=category)
+            except Category.DoesNotExist:
+                activeList = Listing.objects.filter(isActive=True)
+        else:
+            activeList = Listing.objects.filter(isActive=True)
         categories = Category.objects.all()
         return render(request, "auctions/index.html", {
             "listings": activeList,
             "categories": categories,
-            "selected_category": category
-    })
+            "selected_category": categoryForm
+        })
     else:
         return HttpResponseRedirect(reverse("index"))
+
+
 
 
 def createListing(request):
