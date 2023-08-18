@@ -51,23 +51,38 @@
     <p>Seller: {{ product.owner }}</p>
     <h4>Price: {{ product.price.bid }} Turkish Liras</h5>
     
-    {% if user.is_authenticated %}
-    <form action="{% url 'addBid' id=product.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="price">Add Bid:</label>
-            <input type="number" min="0" name="newBid" placeholder="Add New Bid">
-            <button type="submit" class="btn btn-warning">ADD</button>
-            {% if bidError %}
-            <p class="text-danger">{{ bidError }}</p>
+        {% if user.is_authenticated %}
+        {% if not bidding_closed %}
+            <form action="{% url 'addBid' id=product.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="price">Add Bid:</label>
+                    <input type="number" min="0" name="newBid" placeholder="Add New Bid">
+                    <button type="submit" class="btn btn-warning">ADD</button>
+                    {% if bidError %}
+                        <p class="text-danger">{{ bidError }}</p>
+                        {% endif %}
+                    </div>
+                </form>
+            {% else %}
+                {% if winning_bid %}
+                    {% if winner %}
+                        <p>{{ winner }} won this auction with a bid of {{ winning_bid.bid }} Turkish Liras.</p>
+                    {% else %}
+                        <p>Congratulations! You won this auction with a bid of {{ winning_bid.bid }} Turkish Liras.</p>
+                    {% endif %}
+                {% else %}
+                    <p>Bidding for this product is closed.</p>
+                    {% if product.price.user %}
+                        <p>{{ product.price.user }} won this auction with a bid of {{ product.price.bid }} Turkish Liras.</p>
+                    {% endif %}
+                {% endif %}
             {% endif %}
-          </div>
-    </form>
-    {% else %}
-        <p>You must be logged in to place a bid.</p>
-    {% endif %}
-
+        {% else %}
+            <p>You must be logged in to place a bid and bid details.</p>
+        {% endif %}
     
+        
     <br>
 
         <h2>Comments</h2>

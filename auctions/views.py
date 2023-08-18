@@ -9,14 +9,33 @@ from .models import User, Category, Listing, Comment, Bid
 
 def product(request, id):
     productDetails = Listing.objects.get(pk=id)
+
+    if not productDetails.isActive:
+        bidding_closed = True
+    else:
+        bidding_closed = False
+
     onWatchList = request.user in productDetails.toWatchList.all()
     showComments = Comment.objects.filter(product=productDetails)
     isOwner = request.user.username == productDetails.owner.username
+
+    winning_bid = None
+    winner = None
+    if not productDetails.isActive:
+        if productDetails.price.user == request.user:
+            winning_bid = productDetails.price
+        else:
+            winning_bid = productDetails.price
+            winner = productDetails.price.user
+
     return render(request,"auctions/product.html", {
         "product": productDetails,
         "onWatchList": onWatchList,
         "showComments": showComments,
-        "isOwner" : isOwner 
+        "isOwner" : isOwner,
+        "bidding_closed": bidding_closed,
+        "winning_bid": winning_bid,
+        "winner": winner 
     })
 
 def disableBid(request, id):
