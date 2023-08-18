@@ -1,6 +1,19 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+    <div class="container">
+        {% if msg %}
+            {% if updated %}
+             <div class="alert alert-success" role="alert">
+                {{ msg }}
+             </div>
+             {% else %}
+             <div class="alert alert-danger" role="alert">
+                {{ msg }}
+             </div>
+             {% endif %}
+        {% endif %}
+    </div>
 
     <div class="row">
         {% if user.is_authenticated %}
@@ -23,8 +36,25 @@
     <img src="{{ product.imgUrl }}" alt=" {{ product.title }}" height="350px">
     <p>Description: {{ product.description }}</p>
     <p>Seller: {{ product.owner }}</p>
-    <h4>Price: {{ product.price }} Turkish Liras</h5>
+    <h4>Price: {{ product.price.bid }} Turkish Liras</h5>
+    
+    {% if user.is_authenticated %}
+    <form action="{% url 'addBid' id=product.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="price">Add Bid:</label>
+            <input type="number" min="0" name="newBid" placeholder="Add New Bid">
+            <button type="submit" class="btn btn-warning">ADD</button>
+            {% if bidError %}
+            <p class="text-danger">{{ bidError }}</p>
+            {% endif %}
+          </div>
+    </form>
+    {% else %}
+        <p>You must be logged in to place a bid.</p>
+    {% endif %}
 
+    
     <br>
 
         <h2>Comments</h2>

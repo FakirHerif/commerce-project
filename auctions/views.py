@@ -17,6 +17,38 @@ def product(request, id):
         "showComments": showComments
     })
 
+def addBid(request, id):
+    if request.method == "POST":
+        newBid = request.POST.get('newBid', None)
+        if newBid is not None and newBid != '':
+            try:
+                newBid = int(newBid)
+                productDetails = Listing.objects.get(pk=id)
+                if newBid > productDetails.price.bid:
+                    updateBid = Bid(bidder=request.user, bid=newBid)
+                    updateBid.save()
+                    productDetails.price = updateBid
+                    productDetails.save()
+                    return render(request, "auctions/product.html",{
+                        "product": productDetails,
+                        "msg": "Bid was updated SUCCESSFULLY",
+                        "update": True
+                    })
+                else:
+                    return render(request, "auctions/product.html",{
+                        "product": productDetails,
+                        "msg": "Bid was updated FAILED. Please enter a higher bid.",
+                        "update": False
+                    })
+            except ValueError:
+                return render(request, "auctions/product.html",{
+                    "product": productDetails,
+                    "msg": "Invalid bid value. Please enter a valid number.",
+                    "update": False
+                })
+    # Eğer bir hata durumu veya POST isteği değilse, ürün sayfasına yönlendirme yap.
+    return HttpResponseRedirect(reverse("product", args=[id]))
+
 def newComment(request,id):
     theCurrentUser = request.user
     productDetails = Listing.objects.get(pk=id)
