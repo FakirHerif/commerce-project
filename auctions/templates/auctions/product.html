@@ -42,7 +42,10 @@
         <br>
         <ul class="list-group">
             {% for comments in showComments %}
-                <li class="list-group-item">{{ comments.msg }}</li>
+                <li class="list-group-item"> COMMENT: {{ comments.msg }}
+                    <br>
+                    <p>COMMENT OWNER: <strong>{{ comments.writer }}</strong></p>
+                </li>
             {% endfor %}
         </ul>
 {% endblock %}
