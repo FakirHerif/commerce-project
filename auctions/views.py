@@ -20,6 +20,9 @@ def product(request, id):
 def addBid(request, id):
     if request.method == "POST":
         newBid = request.POST.get('newBid', None)
+        productDetails = Listing.objects.get(pk=id)
+        onWatchList = request.user in productDetails.toWatchList.all()
+        showComments = Comment.objects.filter(product=productDetails)
         if newBid is not None and newBid != '':
             try:
                 newBid = int(newBid)
@@ -32,13 +35,17 @@ def addBid(request, id):
                     return render(request, "auctions/product.html",{
                         "product": productDetails,
                         "msg": "Bid was updated SUCCESSFULLY",
-                        "update": True
+                        "update": True,
+                        "onWatchList": onWatchList,
+                        "showComments": showComments
                     })
                 else:
                     return render(request, "auctions/product.html",{
                         "product": productDetails,
                         "msg": "Bid was updated FAILED. Please enter a higher bid.",
-                        "update": False
+                        "update": False,
+                        "onWatchList": onWatchList,
+                        "showComments": showComments
                     })
             except ValueError:
                 return render(request, "auctions/product.html",{
