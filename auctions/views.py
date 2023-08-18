@@ -39,12 +39,22 @@ def product(request, id):
     })
 
 def closed_listings(request):
+    selected_category = request.GET.get('category')
     closed_list = Listing.objects.filter(isActive=False)
+
+    if selected_category:
+        category_obj = Category.objects.get(categoryName=selected_category)
+        closed_list = closed_list.filter(category=category_obj)
+
     categories = Category.objects.all()
     return render(request, "auctions/closed_listings.html", {
         "closed_listings": closed_list,
         "categories": categories,
+        "selected_category": selected_category
     })
+
+
+
 
 def disableBid(request, id):
     productDetails = Listing.objects.get(pk=id)
