@@ -5,12 +5,14 @@
     <form action="{% url 'viewCategory' %}" method="POST" class="my-4">
         {% csrf_token %}
         <label for="category">Select Category:</label>
+    <div class="select">
         <select class="category" name="category" id="category">
             <option value="" {% if not selected_category %}selected{% endif %}>All Categories</option>
             {% for category in categories %}
                 <option value="{{ category.categoryName }}" {% if selected_category == category.categoryName %}selected{% endif %}>{{ category.categoryName }}</option>
             {% endfor %}
         </select>
+    </div>
         <button type="submit" class="btn btn-warning">Filter</button>
     </form>
     
