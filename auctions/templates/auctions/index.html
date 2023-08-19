@@ -1,7 +1,13 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+
+<div class="wrapper">
+    <div class="main-div main-div1">
+        <h2>Active Listings</h2>
+    </div>
+</div>
+
     <form action="{% url 'viewCategory' %}" method="POST" class="my-4">
         {% csrf_token %}
         
