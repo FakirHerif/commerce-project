@@ -738,8 +738,44 @@ margin-left: 10px;
 
 .btnAdd {
   display: flex;
-  justify-content: left; /* Align items to the start (left) of the container */
-  flex-wrap: wrap; /* Allow buttons to wrap when needed */
+  justify-content: left;
+  flex-wrap: wrap;
   margin-bottom: 30px;
   margin-left: 10px;
+}
+
+
+
+
+
+
+.deneme {
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  font-weight: bold;
+}
+
+.deneme1 {
+  font-size: 16px;
+  margin: 10px;
+}
+
+.deneme2 {
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+  margin: 20px 10px;
+}
+
+.deneme-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.deneme-error {
+  font-weight: bold;
+  color: red;
+  margin-top: 5px;
 }

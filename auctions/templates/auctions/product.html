@@ -51,43 +51,56 @@
         </div>
     </div>
     <br>
-    <img src="{{ product.imgUrl }}" alt=" {{ product.title }}" height="350px">
-    <br>
-    <br>
-    <p>Description: {{ product.description }}</p>
-    <p>Seller: {{ product.owner }}</p>
-    <h4>Price: {{ product.price.bid }} Turkish Liras</h5>
-    <br>
-        {% if user.is_authenticated %}
-        {% if not bidding_closed %}
-            <form action="{% url 'addBid' id=product.id %}" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="price">Add Bid:</label>
-                    <input type="number" min="0" name="newBid" placeholder="Add New Bid">
-                    <button type="submit" class="btn btn-warning">ADD</button>
-                    {% if bidError %}
-                        <p class="text-danger">{{ bidError }}</p>
-                        {% endif %}
-                    </div>
-                </form>
-            {% else %}
-                {% if winning_bid %}
-                    {% if winner %}
-                        <p>{{ winner }} won this auction with a bid of {{ winning_bid.bid }} Turkish Liras.</p>
+    <table class="deneme">
+        <tr>
+            <td>
+                <img src="{{ product.imgUrl }}" alt="{{ product.title }}" height="350px">
+            </td>
+            <td class="deneme-details">
+                <h4 class="deneme2">Product Description</h4>
+                <p class="deneme1">{{ product.description }}</p>
+                <hr class="deneme-divider">
+                <p class="deneme1"><span class="deneme2">Seller:</span> {{ product.owner }}</p>
+                <hr class="deneme-divider">
+                <p class="deneme1"><span class="deneme2">Price:</span> {{ product.price.bid }} Turkish Liras</p>
+                <hr class="deneme-divider">
+                {% if user.is_authenticated %}
+                    {% if not bidding_closed %}
+                        <form action="{% url 'addBid' id=product.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="price" class="deneme1">Add Bid</label>
+                                <input type="number" min="0" name="newBid" placeholder="Submit New Bid" class="deneme-input">
+                                <button type="submit" class="btn btn-warning">ADD</button>
+                                {% if bidError %}
+                                    <p class="text-danger deneme-error">{{ bidError }}</p>
+                                {% endif %}
+                            </div>
+                        </form>
                     {% else %}
-                        <p>Congratulations! You won this auction with a bid of {{ winning_bid.bid }} Turkish Liras.</p>
+                        {% if winning_bid %}
+                            {% if winner %}
+                                <p class="deneme3">
+                                    Winner: <strong style="color: #34495e;">{{ winner }}</strong> won this auction with a bid of <strong style="color: #34495e;">{{ winning_bid.bid }} Turkish Liras</strong>
+                                </p>
+                            {% else %}
+                                <p class="deneme3"><strong style="color: #34495e;">Congratulations!</strong> You won this auction with a bid of <strong style="color: #34495e;">{{ winning_bid.bid }} Turkish Liras</strong></p>
+                            {% endif %}
+                        {% else %}
+                            <p class="deneme3">Bidding for this product is closed.</p>
+                            {% if product.price.user %}
+                                <p class="deneme3"><strong style="color: #34495e;">{{ product.price.user }}</strong> won this auction with a bid of <strong style="color: #34495e;">{{ product.price.bid }} Turkish Liras</strong></p>
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                 {% else %}
-                    <p>Bidding for this product is closed.</p>
-                    {% if product.price.user %}
-                        <p>{{ product.price.user }} won this auction with a bid of {{ product.price.bid }} Turkish Liras.</p>
-                    {% endif %}
+                    <p class="deneme3">You must be <a href="{% url 'login' %}">logged in</a> to place a bid and view bid details.</p>
                 {% endif %}
-            {% endif %}
-        {% else %}
-            <p>You must be logged in to place a bid and bid details.</p>
-        {% endif %}
+            </td>
+        </tr>
+    </table>
+    
+    
     
         
     <br>
