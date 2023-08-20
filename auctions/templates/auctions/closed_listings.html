@@ -1,29 +1,37 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Closed Listings</h2>
+
+<div class="wrapper">
+    <div class="main-div main-div1">
+        <h2>Closed Listings</h2>
+    </div>
+</div>
 
     <form action="{% url 'closed_listings' %}" method="GET" class="my-4">
-      
+  <div class="select-container">      
       <div class="select">
-      <select name="category" id="category">
+      <select class="category" name="category" id="category">
           <option value="" {% if not selected_category %}selected{% endif %}>All Categories</option>
           {% for category in categories %}
               <option value="{{ category.categoryName }}" {% if selected_category == category.categoryName %}selected{% endif %}>{{ category.categoryName }}</option>
           {% endfor %}
       </select>
     </div>
-      <button type="submit" class="btn btn-warning">Filter</button>
+      <button type="submit" class="filterBtn">Filter</button>
+    </div>
   </form>
   
 
-    <div class="row mx-3">
+    <div class="card-container">
         {% for listing in closed_listings %}
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img class="card-img-top" src="{{ listing.imgUrl }}" alt="{{ listing.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ listing.title }}</h5>
                     <p class="card-text">{{ listing.description }}</p>
+                </div>
+                <div class="card-footer">
                     <a href="{% url 'product' id=listing.id %}" class="btn btn-primary">Product Details</a>
                 </div>
             </div>

@@ -1,7 +1,13 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Create Listing</h2>
+<div class="wrapper">
+    <div class="main-div main-div1">
+        <h2>Create Listing</h2>
+    </div>
+</div>
+
+<br>
 
     <form action="{% url 'create' %}" method="POST">
         {% csrf_token %}
@@ -24,6 +30,7 @@
             <label for="price">Price</label>
             <input type="number" min="0" class="form-control" name="price" id="price" placeholder="Price" required>
         </div>
+    <div class="select-container">
         <div class="select">
             <select class="category" name="category" id="category">
                 <option selected>Select Category</option>
@@ -33,6 +40,7 @@
             </select>
         </div>
         <br>
-        <button type="submit" class="btn btn-outline-success">Create New Listing</button>
+        <button type="submit" class="filterBtn">Create New Listing</button>
+    </div>
     </form>
 {% endblock %}

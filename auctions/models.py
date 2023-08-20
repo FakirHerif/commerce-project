@@ -39,6 +39,6 @@ class Comment(models.Model):
     msg = models.CharField(max_length=640)
     timestamp = models.DateTimeField(default=timezone.now)
 
-    def ___str___(self):
+    def __str__(self):
         return f"{self.writer} comment on {self.listing}"
     

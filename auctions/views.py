@@ -144,9 +144,16 @@ def newComment(request,id):
 def toWatchList(request):
     if request.user.is_authenticated:
         theCurrentUser = request.user
+        selected_category = request.GET.get('category')
         lists = theCurrentUser.WatchListForUsers.all()
+
+        if selected_category:
+            lists = lists.filter(category__categoryName=selected_category)
+        categories = Category.objects.all()
         return render(request, "auctions/toWatchList.html", {
-        "lists": lists
+        "lists": lists,
+        "selected_category": selected_category,
+        "categories": categories
         })
     else:
         return render(request, "auctions/toWatchList.html")
