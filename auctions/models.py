@@ -17,8 +17,8 @@ class Bid(models.Model):
     bid = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="bidUser")
 
-    def ___str___(self):
-        return self.bid
+    def __str__(self):
+        return str(self.bid)
 
 class Listing(models.Model):
     title = models.CharField(max_length=64)
@@ -40,5 +40,5 @@ class Comment(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.writer} comment on {self.listing}"
+        return f"{self.writer} comment on {self.product}"
     
