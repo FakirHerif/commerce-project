@@ -644,6 +644,7 @@ body {
   flex-direction: column;
   display: flex;
   width: calc(11.95% - 1px); /* 8 kart sığacak şekilde hesapladık */
+  border: 3px solid #34495e; /* Çerçeve eklendi */
 }
 
 .card .card-body {
@@ -660,22 +661,37 @@ body {
 
 .card-title {
   text-align: center; /* Kart başlığını ortala */
-  margin-bottom: 10px; /* Başlık ile açıklama arasına 10px boşluk bırak */
+  margin-bottom: 15px; /* Başlık ile açıklama arasına 15px boşluk bırak */
   font-size: 1.2rem; /* Başlık font boyutunu biraz büyütelim */
+  font-weight: bold;
 }
 
 
 .card-text {
   text-align: center; /* Kart açıklamasını ortala */
-  margin-bottom: 15px; /* Açıklama ile düğme arasına 15px boşluk bırak */
+  margin-bottom: 5px; /* Açıklama ile düğme arasına 5px boşluk bırak */
+  font-size: 0.85rem;
 }
 
 .btn-primary {
   display: block; 
   margin: 0 auto; /* Kart düğmesini ortala */
   margin-top: 0px;
+  background-color: #34495e;
+  border: none;
 }
 
+
+.btn-primary:hover {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-primary:focus, .btn-primary:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
 
 .card-container {
   display: flex;
