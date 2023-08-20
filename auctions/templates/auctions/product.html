@@ -45,12 +45,19 @@
         {% endif %}
     </div>
 
-    <h2>Product: {{ product.title }}</h2>
+    <div class="wrapper">
+        <div class="main-div main-div1">
+            <h2>{{ product.title }}</h2>
+        </div>
+    </div>
+    <br>
     <img src="{{ product.imgUrl }}" alt=" {{ product.title }}" height="350px">
+    <br>
+    <br>
     <p>Description: {{ product.description }}</p>
     <p>Seller: {{ product.owner }}</p>
     <h4>Price: {{ product.price.bid }} Turkish Liras</h5>
-    
+    <br>
         {% if user.is_authenticated %}
         {% if not bidding_closed %}
             <form action="{% url 'addBid' id=product.id %}" method="POST">

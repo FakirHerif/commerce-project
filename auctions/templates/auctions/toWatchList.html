@@ -36,7 +36,6 @@
         </div>
     {% else %}
         <p>You need to be logged in to access your WatchList</p>
-        <br>
-        <a href="{% url 'login' %}" class="btn btn-danger">Log In</a>
+        <a href="{% url 'login' %}" class="btn btn-success">Log In</a>
     {% endif %}
 {% endblock %}

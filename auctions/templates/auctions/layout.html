@@ -12,9 +12,9 @@
     <h1>Auctions</h1>
     <div class="user-info">
         {% if user.is_authenticated %}
-            Signed in as <strong>{{ user.username }}</strong>
+            <p><strong>Signed in as</strong> <strong style="color: #f39c12;">{{ user.username }}</strong></p>
         {% else %}
-            Not signed in.
+            </p><strong>Not signed in</strong></p>
         {% endif %}
     </div>
 </div>
