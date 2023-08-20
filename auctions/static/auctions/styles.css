@@ -643,7 +643,7 @@ body {
   overflow: hidden; /* Kart içeriği taşarsa keselim */
   flex-direction: column;
   display: flex;
-  width: calc(11.95% - 1px); /* 3 kart sığacak şekilde hesapladık */
+  width: calc(11.95% - 1px); /* 8 kart sığacak şekilde hesapladık */
 }
 
 .card .card-body {
