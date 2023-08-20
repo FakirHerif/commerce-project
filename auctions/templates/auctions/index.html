@@ -10,7 +10,7 @@
 
     <form action="{% url 'viewCategory' %}" method="POST" class="my-4">
         {% csrf_token %}
-        
+  <div class="select-container">    
     <div class="select">
         <select class="category" name="category" id="category">
             <option value="" {% if not selected_category %}selected{% endif %}>All Categories</option>
@@ -19,12 +19,13 @@
             {% endfor %}
         </select>
     </div>
-        <button type="submit" class="btn btn-warning">Filter</button>
+        <button type="submit" class="filterBtn">Filter</button>
+  </div>  
     </form>
     
     <div class="row mx-3">
     {% for listing in listings %}
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 15rem;">
             <img class="card-img-top" src="{{ listing.imgUrl }}" alt="{{ listing.title }}">
             <div class="card-body">
                 <h5 class="card-title">{{ listing.title }}</h5>

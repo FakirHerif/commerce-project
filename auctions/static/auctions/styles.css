@@ -15,6 +15,36 @@ body {
     padding: 10px 20px;
 }
 
+
+.select-container {
+  position: relative;
+}
+
+
+.filterBtn {
+  position: absolute;
+  top:0;
+  left: 415px;
+  background-color: #34495e;
+  color: white;
+  border-radius: .25em;
+  padding: 15px 25px;
+  border: none;
+  outline: none;
+  box-shadow: none; 
+}
+
+.filterBtn:hover {
+  background-color: #f39c12;
+  color: white;
+}
+
+.filterBtn:focus, .filterBtn:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
 :root {
     --gray: #34495e;
     --darkgray: #2c3e50;
@@ -46,6 +76,7 @@ body {
     height: 3em;
     border-radius: .25em;
     overflow: hidden;
+    left: 9px;
   }
   /* Arrow */
   .select::after {
