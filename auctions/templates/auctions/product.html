@@ -70,8 +70,8 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="price" class="deneme1">Add Bid</label>
-                                <input type="number" min="0" name="newBid" placeholder="Submit New Bid" class="deneme-input">
-                                <button type="submit" class="btn btn-warning">ADD</button>
+                                <input type="number" min="0" name="newBid" style="text-align: center;" placeholder="Submit New Bid" class="deneme-input">
+                                <button type="submit" class="add-button">ADD</button>
                                 {% if bidError %}
                                     <p class="text-danger deneme-error">{{ bidError }}</p>
                                 {% endif %}

@@ -767,7 +767,7 @@ margin-left: 10px;
 
 .deneme-input {
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #34495e;
   border-radius: 4px;
 }
 
@@ -848,4 +848,34 @@ margin-left: 10px;
 
 .comment-input-group button:hover {
   background-color: #f39c12;
+}
+
+
+.add-button {
+  background-color: #34495e;
+  color: white;
+  border-radius: .25em;
+  border: none;
+  outline: none;
+  box-shadow: none; 
+  margin: 0 auto; /* Kart düğmesini ortala */
+  margin-top: 0px;
+  white-space: nowrap; /* Metnin taşmasını engeller */
+  overflow: hidden; /* Taşan içeriği gizler */
+  text-overflow: ellipsis; /* Taşan içeriği "..." ile gösterir */
+  width: 65px; /* istediğiniz genişliği belirleyin */
+  height: 40px; /* istediğiniz yüksekliği belirleyin */
+  padding: 0;
+  margin-left: 5px; /* Burada butonu sağ tarafa kaydırmak için 5px değerini kullandım */
+}
+
+.add-button:hover {
+  background-color: #f39c12;
+  color: white;
+}
+
+.add-button:focus, .filterBtn:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
