@@ -702,3 +702,36 @@ body {
 h5 {
 margin-left: 10px;
 }
+
+
+.form-group {
+  margin-left: 5px; /* Sol kenarı 5px boşluk bırak */
+}
+
+.form-control {
+  width: 350px; /* Form elemanlarının genişliğini 200px olarak ayarla */
+  margin: 2px 0; /* Form elemanları arasında 5px boşluk bırak */
+}
+
+
+.btn-primary-two {
+  display: block; 
+  margin: 0 auto; /* Kart düğmesini ortala */
+  margin-top: 0px;
+  background-color: #34495e;
+  border: none;
+  color: white;
+  margin-left: 5px;
+}
+
+
+.btn-primary-two:hover {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-primary-two:focus, .btn-primary-two:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
