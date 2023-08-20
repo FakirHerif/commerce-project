@@ -735,3 +735,11 @@ margin-left: 10px;
   border: none;
   box-shadow: none;
 }
+
+.btnAdd {
+  display: flex;
+  justify-content: left; /* Align items to the start (left) of the container */
+  flex-wrap: wrap; /* Allow buttons to wrap when needed */
+  margin-bottom: 30px;
+  margin-left: 10px;
+}

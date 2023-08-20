@@ -22,12 +22,12 @@
     </div>
     {% endif %}
 
-    <div class="row mx-3">
+    <div class="btnAdd">
         {% if user.is_authenticated and product.isActive %}
             {% if isOwner %}
                 <form action="{% url 'disableBid' id=product.id %}" method="POST" class="mx-3">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">CLOSE</button>
+                    <button type="submit" class="btn btn-danger">End The Auction</button>
                 </form>
             {% endif %}
             {% if onWatchList %}
