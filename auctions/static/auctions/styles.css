@@ -626,3 +626,60 @@ body {
     -o-border-radius: 5px;
   }
   
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px; /* Yukarıdan 5px boşluk bırak */
+  justify-content: center; /* Kartları yatayda ortala */
+}
+
+.card {
+  margin: 5px; /* Kartlar arasında 5px boşluk bırak */
+  margin-bottom: 5px; /* Kartlar arası boşluk */
+  background-color: white; /* Kartlara arka plan rengi ekleyelim */
+  border-radius: 5px; /* Kart köşelerine yuvarlatma ekleyelim */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Kartlara hafif bir gölge ekleyelim */
+  overflow: hidden; /* Kart içeriği taşarsa keselim */
+  flex-direction: column;
+  display: flex;
+  width: calc(11.95% - 1px); /* 3 kart sığacak şekilde hesapladık */
+}
+
+.card .card-body {
+  flex: 1; /* İçerik bölümü esnek olacak */
+}
+
+.card-body {
+  text-align: center; /* Kart içeriğini ortala */
+  flex-grow: 1; /* Kart içeriğini aşağıya doğru büyütelim */
+  padding: 15px; /* İçeriğin kenar boşluğunu artıralım */
+}
+
+
+
+.card-title {
+  text-align: center; /* Kart başlığını ortala */
+  margin-bottom: 10px; /* Başlık ile açıklama arasına 10px boşluk bırak */
+  font-size: 1.2rem; /* Başlık font boyutunu biraz büyütelim */
+}
+
+
+.card-text {
+  text-align: center; /* Kart açıklamasını ortala */
+  margin-bottom: 15px; /* Açıklama ile düğme arasına 15px boşluk bırak */
+}
+
+.btn-primary {
+  display: block; 
+  margin: 0 auto; /* Kart düğmesini ortala */
+  margin-top: 0px;
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;  
+  gap: 5px; /* Kartlar arası boşluk */
+}
+
