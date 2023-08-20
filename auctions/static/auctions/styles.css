@@ -745,15 +745,12 @@ margin-left: 10px;
 }
 
 
-
-
-
-
 .deneme {
   border-collapse: collapse;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 12px 14px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 20px;
   font-weight: bold;
+  border: 2px solid #34495e;
 }
 
 .deneme1 {
@@ -778,4 +775,77 @@ margin-left: 10px;
   font-weight: bold;
   color: red;
   margin-top: 5px;
+}
+
+
+
+.comments-list {
+  margin-top: 20px;
+  padding: 0;
+}
+
+.comment-item {
+  border: none;
+  background-color: #f7f7f7;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.comment-owner {
+  color: #3498db;
+}
+
+.comment-time {
+  color: #95a5a6;
+  font-size: 14px;
+}
+
+.comment-msg {
+  font-size: 16px;
+}
+
+
+.comment-form {
+  margin-top: 20px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #34495e;
+  border: 3px solid #34495e;
+}
+
+.comment-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.comment-input-group input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: 1.5px solid #34495e;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.comment-input-group button {
+  padding: 8px 15px;
+  background-color: #34495e;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.comment-input-group button:hover {
+  background-color: #f39c12;
 }
